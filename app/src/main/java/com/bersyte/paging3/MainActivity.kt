@@ -25,35 +25,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupRecyclerView()
-        loadData()
+
 
     }
 
 
-    private fun setupRecyclerView() {
 
-        characterAdapter = CharacterAdapter()
-
-        binding.recyclerView.apply {
-            adapter = characterAdapter
-            layoutManager = StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.VERTICAL
-            )
-            setHasFixedSize(true)
-        }
-
-    }
-
-    private fun loadData() {
-
-        lifecycleScope.launch {
-            viewModel.listData.collect {
-
-                Log.d("aaa", "load: $it")
-                characterAdapter.submitData(it)
-            }
-
-        }
-    }
 }
