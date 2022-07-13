@@ -1,6 +1,7 @@
 package com.bersyte.paging3.model
 
-
 data class ResponseApi(
-    val results: List<RickMorty>
+    val body: List<Body>,
+    val page: String,
+    val status: Int
 )
