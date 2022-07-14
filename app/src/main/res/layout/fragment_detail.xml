@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -46,8 +47,9 @@
 
                     <ImageView
                         android:id="@+id/imageTeamOne"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
@@ -79,14 +81,6 @@
                     android:orientation="vertical">
 
 
-                    <TextView
-                        android:id="@+id/textViewSportName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:text="TextView"
-                        android:textColor="@color/white" />
-
                     <ImageView
                         android:id="@+id/imageView2"
                         android:layout_width="match_parent"
@@ -116,8 +110,9 @@
 
                     <ImageView
                         android:id="@+id/imageTeamSecond"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
@@ -144,6 +139,18 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/matchScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="56dp"
+                android:visibility="invisible"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="@color/white" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +172,6 @@
                         android:id="@+id/winFirstScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="merhaba"
                         app:layout_constraintBottom_toBottomOf="@+id/imageFramaOne"
                         app:layout_constraintEnd_toEndOf="@+id/imageFramaOne"
                         app:layout_constraintStart_toStartOf="@+id/imageFramaOne"
@@ -187,7 +193,6 @@
                         android:id="@+id/drawScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="merhaba"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/imageFramaSecond"
                         app:layout_constraintStart_toStartOf="@+id/imageFramaSecond"
@@ -211,7 +216,6 @@
                         android:id="@+id/winSecondScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="merhaba"
                         app:layout_constraintBottom_toBottomOf="@+id/imageFramaThird"
                         app:layout_constraintEnd_toEndOf="@+id/imageFramaThird"
                         app:layout_constraintStart_toStartOf="@+id/imageFramaThird"

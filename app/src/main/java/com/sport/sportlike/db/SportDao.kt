@@ -17,6 +17,9 @@ interface SportDao {
     @Query("SELECT * FROM sportmodel ORDER BY sportTitle ASC ")
     fun getAllToDos(): Flow<List<SportModel>>
 
+    @Query("UPDATE listmodel SET score = :score WHERE gameid = :id")
+    fun updateEvent(id: Int, score:String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllSport(list: ListModel)
 

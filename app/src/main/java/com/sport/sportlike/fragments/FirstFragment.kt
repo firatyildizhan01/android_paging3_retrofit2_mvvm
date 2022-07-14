@@ -13,6 +13,7 @@ import com.sport.sportlike.model.SportModel
 import com.sport.sportlike.viewmodel.CharacterViewModel
 import com.sport.sportlike.viewmodel.SportViewModel
 import com.bumptech.glide.Glide
+import com.sport.sportlike.utils.IsOnline
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -32,6 +33,7 @@ class FirstFragment : Fragment() {
     var imageUrlOne = ""
     var imageUrlSecond = ""
     var score = ""
+    var gameid = ""
 
     private val viewModel: CharacterViewModel by viewModels()
     private val sportViewModel: SportViewModel by viewModels()
@@ -39,6 +41,8 @@ class FirstFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if(activity?.let { IsOnline().isOnline(it) } == true){randomSelectOnCreate()  }
 
         activity?.findViewById<View>(R.id.switchLayouts)!!.visibility = View.VISIBLE
 
@@ -50,7 +54,6 @@ class FirstFragment : Fragment() {
     ): View? {
         binding = FragmentFirstBinding.inflate(layoutInflater)
 
-        randomSelectOnCreate()
 
 //        activity?.findViewById<View>(R.id.switchLayouts)!!.visibility = View.INVISIBLE
 
@@ -60,13 +63,18 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(activity?.let { IsOnline().isOnline(it) } == true){randomSelectOnCreate()}
+
+
 
         binding.likeLayout.setOnClickListener(){
-            randomSelectLike()
+            if(activity?.let { IsOnline().isOnline(it) } == true){randomSelectLike()}
+
         }
 
         binding.dislikeLayout.setOnClickListener(){
-            randomSelect()
+            if(activity?.let { IsOnline().isOnline(it) } == true){randomSelect()}
+
         }
     }
 
@@ -97,6 +105,7 @@ class FirstFragment : Fragment() {
                     imageUrlOne = globalData?.opp_1_icon.toString()
                     imageUrlSecond = globalData?.opp_2_icon.toString()
                     score = globalData?.score_full ?: ""
+                    gameid = globalData?.game_id.toString()
                     calendar = formatted
 
                     textDate.text = formatted
@@ -148,6 +157,7 @@ class FirstFragment : Fragment() {
                     imageUrlOne = globalData?.opp_1_icon.toString()
                     imageUrlSecond = globalData?.opp_2_icon.toString()
                     score = globalData?.score_full ?: ""
+                    gameid = globalData?.game_id.toString()
                     finishTime = ""
                     calendar = formatted
 
@@ -197,7 +207,8 @@ class FirstFragment : Fragment() {
                             finishTime,
                             imageUrlOne,
                             imageUrlSecond,
-                            score
+                            score,
+                            gameid
                             )
                     )
 
@@ -217,6 +228,7 @@ class FirstFragment : Fragment() {
                     imageUrlOne = globalData?.opp_1_icon.toString()
                     imageUrlSecond = globalData?.opp_2_icon.toString()
                     score = globalData?.score_full ?: ""
+                    gameid = globalData?.game_id.toString()
                     calendar = formatted
 
                     textDate.text = formatted

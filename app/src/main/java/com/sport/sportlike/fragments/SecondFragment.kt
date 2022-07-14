@@ -14,10 +14,10 @@ import com.sport.sportlike.R
 import com.sport.sportlike.adapter.SportAdapter
 import com.sport.sportlike.databinding.FragmentSecondBinding
 import com.sport.sportlike.model.ListModel
+import com.sport.sportlike.utils.IsOnline
 import com.sport.sportlike.viewmodel.CharacterViewModel
 import com.sport.sportlike.viewmodel.SportViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class SecondFragment : Fragment() {
@@ -40,13 +40,27 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSecondBinding.inflate(layoutInflater)
+        if(activity?.let { IsOnline().isOnline(it) } == true){setupRecyclerView()}
 
-        setupRecyclerView()
 
         return binding.root
     }
 
     private fun setupRecyclerView() {
+
+        sportViewModel.allEvents.observe(requireActivity()) { events ->
+            for(i in events) {
+                viewModel.sportResponse.observe(requireActivity()) { sporList ->
+
+                    var o = sporList.body.mapNotNull {it.events_list.filter { i.gameid in it.game_id.toString()}}.filter {it.size == 1}.elementAtOrNull(0)
+
+                    if(o?.elementAtOrNull(0)?.finale == false){
+                        sportViewModel.updateEvents(o?.elementAtOrNull(0)?.game_id ?: 0,o?.elementAtOrNull(0)?.score_full.toString())
+                    }
+
+                }
+            }
+        }
 
         sportAdapter = SportAdapter()
 

@@ -17,6 +17,10 @@ constructor(private val sportDao: SportDao) {
 
     suspend fun insertEvent(list: ListModel) = sportDao.insertAllSport(list)
 
+    suspend fun updateEvent(id : Int, score : String){
+        sportDao.updateEvent(id,score)
+    }
+
     suspend fun deleteEvent(list: ListModel) = sportDao.deleteSport(list)
 
     fun getAllEvent() = sportDao.getAllSport()

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.sport.sportlike.R
 import com.sport.sportlike.adapter.SportAdapter
 import com.sport.sportlike.databinding.FragmentDetailBinding
@@ -15,6 +17,8 @@ var sporAdapter = SportAdapter()
 class DetailFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailBinding
+    private val arguments :DetailFragmentArgs by navArgs()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +42,16 @@ class DetailFragment : Fragment() {
 
         }
 
-        sporAdapter.setOnItemClickListenerString{
-            var m = it
-            binding.textViewSportName.text = it
+            binding.textviewCalender.text = arguments.id.calendar
+            binding.textFirstTeamName.text = arguments.id.nameOne
+            binding.textSecondTeamName.text = arguments.id.nameSecond
+            binding.winFirstScore.text = arguments.id.rateOne
+            binding.drawScore.text = arguments.id.rateTwo
+            binding.winSecondScore.text = arguments.id.rateThird
+            binding.matchScore.text = arguments.id.score
 
-        }
+        Glide.with(activity!!).load("https://cdn.incub.space/v1/opp/icon/${arguments.id.imageOneUrl}.png").into(binding.imageTeamOne)
+        Glide.with(activity!!).load("https://cdn.incub.space/v1/opp/icon/${arguments.id.imageSecondUrl}.png").into(binding.imageTeamSecond)
 
         return binding.root
     }

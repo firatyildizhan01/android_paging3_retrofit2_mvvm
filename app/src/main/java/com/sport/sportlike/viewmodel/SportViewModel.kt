@@ -7,6 +7,7 @@ import com.sport.sportlike.model.ListModel
 import com.sport.sportlike.model.SportModel
 import com.sport.sportlike.repository.SportRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,6 +26,12 @@ constructor(private val sportRepository: SportRepository) : ViewModel() {
 
     fun insertEvents(list: ListModel) = viewModelScope.launch {
         sportRepository.insertEvent(list) }
+
+    fun updateEvents(id : Int, score : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            sportRepository.updateEvent(id,score)
+        }
+    }
 
     fun deleteEvents(list: ListModel) = viewModelScope.launch {
         sportRepository.deleteEvent(list)}

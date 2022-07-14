@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sport.sportlike.R
 import com.sport.sportlike.databinding.CardListBinding
+import com.sport.sportlike.fragments.SecondFragmentDirections
 import com.sport.sportlike.model.ListModel
 
 class SportAdapter : RecyclerView.Adapter<SportAdapter.ToDoViewHolder>() {
@@ -53,8 +54,7 @@ class SportAdapter : RecyclerView.Adapter<SportAdapter.ToDoViewHolder>() {
             textCalendar.text = currentToDo.calendar
 
             cardSport.setOnClickListener {
-                onItemClickListenerString?.let { it(currentToDo.nameOne) }
-                Navigation.findNavController(it).navigate(R.id.action_secondFragment_to_detailFragment2)
+                Navigation.findNavController(it).navigate(SecondFragmentDirections.actionSecondFragmentToDetailFragment2(currentToDo))
             }
         }
     }
